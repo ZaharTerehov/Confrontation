@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Cysharp.Threading.Tasks;
+﻿
 using UnityEngine;
 
 namespace UI.Services
@@ -8,7 +7,7 @@ namespace UI.Services
     {
         [SerializeField] private bool _isOpen = true;
         
-        public async virtual UniTask Hide()
+        public virtual void Hide()
         {
             if (_isOpen)
             {
@@ -17,7 +16,7 @@ namespace UI.Services
             }
         }
 
-        public async virtual UniTask Show()
+        public virtual void Show()
         {
             if (!_isOpen)
             {
@@ -26,7 +25,7 @@ namespace UI.Services
             }
         }
 
-        public async virtual UniTask Initialize(object data)
+        public virtual void Initialize(object data)
         {
         }
     }

@@ -1,11 +1,9 @@
 
-using Cysharp.Threading.Tasks;
-
 public interface IWindowService
 {
-    public UniTask Hide();
+    public abstract void Hide();
 
-    public UniTask Show();
+    public abstract void Show();
 
-    public UniTask Initialize(object data);
+    public abstract void Initialize(object data);
 }
