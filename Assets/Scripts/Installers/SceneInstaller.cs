@@ -9,7 +9,7 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<IUIWindowsManagerService>().To<UIServices>().AsSingle();
+            Container.Bind<IUIService>().To<UIServices>().AsSingle();
         }
     }
 }

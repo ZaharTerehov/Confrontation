@@ -14,13 +14,14 @@ namespace UI.Controllers
     {
         private static UIController _instance;
 
-        [Inject] private IUIWindowsManagerService _uiWindowsManagerService;
+        [Inject] private IUIService _uiWindowsManagerService;
 
         [Header("Windows")]
         [SerializeField] private Main _mainWindow;
         [SerializeField] private Settings _settingsWindow;
         [SerializeField] private CampaignMap _campaignMapWindow;
-        [SerializeField] private Store _storeWindowWindow;
+        [SerializeField] private Store _storeWindow;
+        [SerializeField] private Academy _academyWindow;
         [SerializeField] private Exit _exitWindow;
 
         [Space]
@@ -32,7 +33,8 @@ namespace UI.Controllers
         public static Main GameWindow => _instance._mainWindow;
         public static Settings MainWindow => _instance._settingsWindow;
         public static CampaignMap LevelSelectionWindow => _instance._campaignMapWindow;
-        public static Store StoreWindowWindow => _instance._storeWindowWindow;
+        public static Store StoreWindow => _instance._storeWindow;
+        public static Academy AcademyWindow => _instance._academyWindow;
         public static Exit EndGameWindow => _instance._exitWindow;
         
         public static Window CurrentWindow => _instance._currentWindow;
