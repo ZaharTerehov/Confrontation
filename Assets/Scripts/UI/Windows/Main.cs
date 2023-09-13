@@ -10,12 +10,14 @@ namespace UI.Windows
     {
         [SerializeField] private Button _play;
         [SerializeField] private Button _settings;
+        [SerializeField] private Button _store;
         [SerializeField] private Button _exit;
         
         private void Start()
         {
             _play.onClick.AddListener(ClickButtonPlay);
             _settings.onClick.AddListener(ClickButtonSettings);
+            _store.onClick.AddListener(ClickButtonStore);
             _exit.onClick.AddListener(ClickButtonExit);
         }
         
@@ -27,6 +29,11 @@ namespace UI.Windows
         private void ClickButtonSettings()
         {
             UIController.Open<Settings>();
+        }
+        
+        private void ClickButtonStore()
+        {
+            UIController.Open<Store>();
         }
         
         private void ClickButtonExit()
