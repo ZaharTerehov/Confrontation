@@ -9,7 +9,8 @@ namespace Installers
     {
         public override void InstallBindings()
         {
-            Container.Bind<IUIService>().To<UIServices>().AsSingle();
+            Container.Bind<IUIService>().To<UIService>().AsSingle();
+            Container.Bind<IAudioService>().To<AudioService>().AsSingle();
         }
     }
 }

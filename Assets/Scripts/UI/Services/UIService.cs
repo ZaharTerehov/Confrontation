@@ -5,7 +5,7 @@ using System;
 
 namespace UI.Services
 {
-    public class UIServices : IUIService
+    public class UIService : IUIService
     {
         public void FillDictionary<T>(Dictionary<Type, T> dictionary, List<T> list)
         {
