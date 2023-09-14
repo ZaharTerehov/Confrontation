@@ -22,16 +22,16 @@ namespace UI.Services
             audioSourceMusic.Play();
         }
 
-        public void SetSfxVolume(float volume, AudioMixer audioMixer)
+        public void SetSfxVolume(float volume, AudioMixer audioMixer, string section)
         {
-            audioMixer.SetFloat("SFX", volume);
-            PlayerPrefs.SetFloat("SFX", volume);
+            audioMixer.SetFloat(section, volume);
+            PlayerPrefs.SetFloat(section, volume);
         }
 
-        public void SetMusicVolume(float volume, AudioMixer audioMixer)
+        public void SetMusicVolume(float volume, AudioMixer audioMixer, string section)
         {
-            audioMixer.SetFloat("Music", volume);
-            PlayerPrefs.SetFloat("Music", volume);
+            audioMixer.SetFloat(section, volume);
+            PlayerPrefs.SetFloat(section, volume);
         }
     }
 }

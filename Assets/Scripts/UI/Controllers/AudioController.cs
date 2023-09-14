@@ -16,6 +16,9 @@ namespace UI.Controllers
         [Inject] private IAudioService _audioService;
 		
         private readonly Dictionary<string, AudioClip> _audio = new Dictionary<string, AudioClip>();
+        
+        public static float SFXVolume => PlayerPrefs.GetFloat("SFX");
+        public static float MusicVolume => PlayerPrefs.GetFloat("Music");
 
         private static AudioController _instance;
 
@@ -48,12 +51,12 @@ namespace UI.Controllers
 
         public static void SetSfxVolume(float volume)
         {
-            _instance._audioService.SetSfxVolume(volume, _instance._audioMixer);
+            _instance._audioService.SetSfxVolume(volume, _instance._audioMixer, "SFX");
         }
         
         public static void SetMusicVolume(float volume)
         {
-            _instance._audioService.SetMusicVolume(volume, _instance._audioMixer);
+            _instance._audioService.SetMusicVolume(volume, _instance._audioMixer, "Music");
         }
     }
 }

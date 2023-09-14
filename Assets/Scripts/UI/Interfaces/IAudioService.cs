@@ -12,8 +12,8 @@ namespace UI.Interfaces
         public void PlayMusic(string music, AudioSource audioSourceMusic, 
             Dictionary<string, AudioClip> audio, bool loopable = true);
 
-        public void SetSfxVolume(float volume, AudioMixer audioMixer);
+        public void SetSfxVolume(float volume, AudioMixer audioMixer, string section);
         
-        public void SetMusicVolume(float volume, AudioMixer audioMixer);
+        public void SetMusicVolume(float volume, AudioMixer audioMixer, string section);
     }
 }
