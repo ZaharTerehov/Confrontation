@@ -1,4 +1,6 @@
 ﻿
+using Gameplay.Interfaces;
+using Gameplay.Services;
 using UI.Interfaces;
 using UI.Services;
 using Zenject;
@@ -11,6 +13,7 @@ namespace Installers
         {
             Container.Bind<IUIService>().To<UIService>().AsSingle();
             Container.Bind<IAudioService>().To<AudioService>().AsSingle();
+            Container.Bind<IMapGeneratorService>().To<MapGeneratorService>().AsSingle();
         }
     }
 }

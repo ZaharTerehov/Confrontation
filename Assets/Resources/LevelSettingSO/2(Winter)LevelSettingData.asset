@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210fff17f46f41cbbae56526ca826b83, type: 3}
+  m_Name: 2(Winter)LevelSettingData
+  m_EditorClassIdentifier: 
+  GridSize: {x: 35, y: 15}
+  Tiles:
+  - {fileID: 11400000, guid: 230838b227b32a3479d0b132ba1f5aa2, type: 2}
+  - {fileID: 11400000, guid: 37fd3496e5b30d14bb9668ee2887d114, type: 2}
+  - {fileID: 11400000, guid: e0b964470f3df934890d83a703a39b01, type: 2}
+  - {fileID: 11400000, guid: 3500572be3080bd4880d99a1ec54884a, type: 2}
+  - {fileID: 11400000, guid: bf03ff20cf77c5a4db5db615903c60a9, type: 2}
+  - {fileID: 11400000, guid: a9cb8c17ceab8f44282aa223c889a3e6, type: 2}
+  - {fileID: 11400000, guid: 41973dc316d36504a9827daefca189ae, type: 2}
+  - {fileID: 11400000, guid: e963081bd4a103142895f187c2dc8ffc, type: 2}
+  - {fileID: 11400000, guid: 4563c479db0d9af408a48a3e87fb4abb, type: 2}
+  EdgeTile: {fileID: 11400000, guid: 7a8150fc1fcb4414e97f50dad7781475, type: 2}
