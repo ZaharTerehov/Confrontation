@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 210fff17f46f41cbbae56526ca826b83, type: 3}
+  m_Name: 5(Summer)LevelSettingData 3
+  m_EditorClassIdentifier: 
+  GridSize: {x: 20, y: 15}
+  Tiles:
+  - {fileID: 11400000, guid: 26914696c2d0d094cac4ccd0f8cc6e68, type: 2}
+  - {fileID: 11400000, guid: a95be121266ec4646a2de50d5532b5a6, type: 2}
+  - {fileID: 11400000, guid: 5999a289511b7f44aa90c090131bda9e, type: 2}
+  - {fileID: 11400000, guid: 842cd2e171d83864eafc3ce852a9490d, type: 2}
+  - {fileID: 11400000, guid: a407a0bbb5801f54a825cdb478a9989c, type: 2}
+  - {fileID: 11400000, guid: a277d799251647f4ab2cdd1a43a96b99, type: 2}
+  - {fileID: 11400000, guid: 5b5d5c16222758b40a65f1b378a288c1, type: 2}
+  - {fileID: 11400000, guid: e6f461400b30f8e4582055ed1d71b527, type: 2}
+  - {fileID: 11400000, guid: 6c3fe9f81460b3b478f452cc3914fee2, type: 2}
+  - {fileID: 11400000, guid: 4b1e3c51f433080459ebf6370e7e5314, type: 2}
+  - {fileID: 11400000, guid: 2daf3d84c8f367b4d934850460c55433, type: 2}
+  EdgeTile: {fileID: 11400000, guid: d1bad87d6ba4f6f4f80974af6402566b, type: 2}

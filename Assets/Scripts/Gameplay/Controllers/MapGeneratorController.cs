@@ -13,7 +13,7 @@ namespace Gameplay.Controllers
 
         [Inject] private IMapGeneratorService _mapGeneratorService;
 
-        private void InitLevel(LevelSettingData levelSettingsData)
+        public void InitLevel(LevelSettingData levelSettingsData)
         {
             _mapGeneratorService.InitLevel(levelSettingsData, _tilemap);
         }
