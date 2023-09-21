@@ -14,7 +14,7 @@ namespace Gameplay.Interfaces
         }
         
         public void LoadLevel(int selectedLevel, List<LevelSettingData> levelData, 
-            MapGeneratorController _mapGeneratorController);
+            MapGeneratorController mapGeneratorController, GameObject map);
         
         public bool CheckLevelSelection(int selectedLevel);
     }

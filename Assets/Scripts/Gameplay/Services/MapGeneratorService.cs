@@ -10,8 +10,10 @@ namespace Gameplay.Services
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
         
-        public void InitLevel(LevelSettingData levelSettingsData, Tilemap tilemap)
+        public void InitLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
         {
+            _currentPositions.Clear();
+            
             for (var x = 0; x < levelSettingsData.GridSize.x; x++)
             {
                 for (var y = 0; y < levelSettingsData.GridSize.y; y++)
@@ -21,6 +23,9 @@ namespace Gameplay.Services
             }
 
             GameBoardFilling(levelSettingsData, tilemap);
+            
+            rect = new Rect(tilemap.localBounds.center - tilemap.localBounds.extents, 
+                tilemap.localBounds.size);
         }
 
         public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap)

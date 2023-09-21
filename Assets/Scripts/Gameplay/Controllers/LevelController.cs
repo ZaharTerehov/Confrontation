@@ -13,6 +13,8 @@ namespace Gameplay.Controllers
         [SerializeField] private List<LevelSettingData> _levelData = new List<LevelSettingData>();
         
         [SerializeField] private MapGeneratorController _mapGeneratorController;
+        
+        [SerializeField] private GameObject _map;
 
         [Inject] private ILevelService _levelService;
 
@@ -32,7 +34,7 @@ namespace Gameplay.Controllers
         private void OnLoadLevel(int selectedLevel)
         {
             _levelService.LoadLevel(selectedLevel, _levelData,
-                _mapGeneratorController);
+                _mapGeneratorController, _map);
         }
     }
 }

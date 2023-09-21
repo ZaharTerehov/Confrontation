@@ -6,7 +6,7 @@ namespace Gameplay.Interfaces
 {
     public interface IMapGeneratorService
     {
-        public void InitLevel(LevelSettingData levelSettingsData, Tilemap tilemap);
+        public void InitLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect);
 
         public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap);
 

@@ -18,7 +18,8 @@ namespace UI.Controllers
 
         [Header("Windows")]
         [SerializeField] private Main _mainWindow;
-        [SerializeField] private Game _gameWindow;
+        [SerializeField] private Hud _hudWindow;
+        [SerializeField] private GameObject _map;
         [SerializeField] private Settings _settingsWindow;
         [SerializeField] private CampaignMap _campaignMapWindow;
         [SerializeField] private Store _storeWindow;
@@ -32,7 +33,8 @@ namespace UI.Controllers
         private Window _previousWindow;
 
         public static Main MainWindow => _instance._mainWindow;
-        public static Game GameWindow => _instance._gameWindow;
+        public static Hud HudWindow => _instance._hudWindow;
+        public static GameObject MapWindow => _instance._map;
         public static Settings SettingsWindow => _instance._settingsWindow;
         public static CampaignMap CampaignMap => _instance._campaignMapWindow;
         public static Store StoreWindow => _instance._storeWindow;

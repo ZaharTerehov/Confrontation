@@ -20,16 +20,19 @@ namespace Gameplay.Services
         }
         
         public void LoadLevel(int selectedLevel, List<LevelSettingData> levelData, 
-            MapGeneratorController mapGeneratorController)
+            MapGeneratorController mapGeneratorController, GameObject map)
         {
-            if (CheckLevelSelection(selectedLevel) == false)
+            // if (CheckLevelSelection(selectedLevel) == false)
+            // {
+            //     return;
+            // }
+
+            if (!UIController.HudWindow.gameObject.activeSelf)
             {
-                return;
+                UIController.Open<Hud>();
+                map.SetActive(true);
             }
-            
-            if(!UIController.GameWindow.gameObject.activeSelf)
-                UIController.Open<Game>();	
-			
+
             _currentLevel = selectedLevel;
             _currentLevelSettingData = levelData[selectedLevel];
 

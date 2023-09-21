@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UI.Windows
 {
-    public class Game : Window
+    public class Hud : Window
     {
         [SerializeField] private Button _back;
         
@@ -18,6 +18,7 @@ namespace UI.Windows
         private void ClickButtonBack()
         {
             UIController.Open<CampaignMap>();
+            UIController.MapWindow.SetActive(false);
         }
     }
 }

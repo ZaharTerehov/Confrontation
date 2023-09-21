@@ -1,4 +1,5 @@
 ﻿
+using System;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -13,9 +14,14 @@ namespace Gameplay.Controllers
 
         [Inject] private IMapGeneratorService _mapGeneratorService;
 
+        public static Rect Rect;
+
         public void InitLevel(LevelSettingData levelSettingsData)
         {
-            _mapGeneratorService.InitLevel(levelSettingsData, _tilemap);
+            _tilemap.ClearAllTiles();
+            _tilemap.ClearAllEditorPreviewTiles();
+            
+            _mapGeneratorService.InitLevel(levelSettingsData, _tilemap, ref Rect);
         }
     }
 }
