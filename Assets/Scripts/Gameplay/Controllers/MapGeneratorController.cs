@@ -16,12 +16,12 @@ namespace Gameplay.Controllers
 
         public static Rect Rect;
 
-        public void InitLevel(LevelSettingData levelSettingsData)
+        public void GenerateLevel(LevelSettingData levelSettingsData)
         {
             _tilemap.ClearAllTiles();
             _tilemap.ClearAllEditorPreviewTiles();
             
-            _mapGeneratorService.InitLevel(levelSettingsData, _tilemap, ref Rect);
+            _mapGeneratorService.GenerateLevel(levelSettingsData, _tilemap, ref Rect);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Gameplay.Services
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
         
-        public void InitLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
+        public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
         {
             _currentPositions.Clear();
             
