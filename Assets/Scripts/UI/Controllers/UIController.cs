@@ -23,6 +23,11 @@ namespace UI.Controllers
         [SerializeField] private Store _storeWindow;
         [SerializeField] private Academy _academyWindow;
         [SerializeField] private Exit _exitWindow;
+        
+        [Space]
+        [Header("LoadWindow")]
+        [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _loadWindow;
 
         [Space]
         [SerializeField] private List<Window> _windows = new List<Window>();
@@ -41,7 +46,9 @@ namespace UI.Controllers
         public static Window PreviousWindow => _instance._previousWindow;
 		
         private Dictionary<Type, Window> _windowsDictionary = new Dictionary<Type, Window>();
-        
+        private static readonly int LogoAnimation = Animator.StringToHash("LogoAnimation");
+        private static readonly int Play = Animator.StringToHash("Play");
+
         private void Awake()
         {
             if (_instance == null)
@@ -54,6 +61,20 @@ namespace UI.Controllers
         
         private void Start()
         {
+            PlayAnimationClip();
+        }
+        
+        private async void PlayAnimationClip()
+        {
+            _loadWindow.SetActive(true);
+            _animator.SetTrigger(Play);
+
+            while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
+            {
+                await UniTask.Yield();
+            }
+            
+            _loadWindow.SetActive(false);
             Open<Main>();
         }
 
