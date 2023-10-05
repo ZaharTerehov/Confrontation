@@ -8,7 +8,9 @@ namespace Gameplay.Units
     public class Unit : MonoBehaviour
     {
         [SerializeField] private Collider2D _unit;
-        [SerializeField] private Animator _animator;
+        [SerializeField] private Animator _movingAnimation;
+        [SerializeField] private Animator _selectedAnimation;
+        [SerializeField] private GameObject _selected;
         
         private bool _isSelected;
         private static Unit _instance;
@@ -18,7 +20,7 @@ namespace Gameplay.Units
             _instance = this;
             
             MoveOnTilemapService.EndMovement += OnSetIdleAnimation;
-            _animator.SetTrigger("Idle");
+            _movingAnimation.SetTrigger("Idle");
         }
 
         private void Update()
@@ -29,19 +31,25 @@ namespace Gameplay.Units
             var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
             if (hit.collider == _unit && !_isSelected)
+            {
                 _isSelected = true;
-                
+                _selected.SetActive(true);
+                _selectedAnimation.SetTrigger("Selected");
+            }
+
             else if (_isSelected)
             {
-                _animator.SetTrigger("Walk");
+                _movingAnimation.SetTrigger("Walk");
                 _isSelected = false;
                 MoveOnTilemap.MoveUnit(gameObject);
+                _selectedAnimation.SetTrigger("Selected");
+                _selected.SetActive(false);
             }
         }
 
         private static void OnSetIdleAnimation()
         {
-            _instance._animator.SetTrigger("Idle");
+            _instance._movingAnimation.SetTrigger("Idle");
         }
     }
 }
