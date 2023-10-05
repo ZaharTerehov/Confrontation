@@ -15,16 +15,7 @@ namespace Installers
             Container.Bind<IAudioService>().To<AudioService>().AsSingle();
             Container.Bind<IMapGeneratorService>().To<MapGeneratorService>().AsSingle();
             Container.Bind<ILevelService>().To<LevelService>().AsSingle();
+            Container.Bind<IMoveOnTilemapService>().To<MoveOnTilemapService>().AsSingle();
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
