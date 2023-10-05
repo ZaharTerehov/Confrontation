@@ -21,15 +21,13 @@ namespace Gameplay.Controllers
 
             if (Input.GetMouseButtonDown(0))
                 _mouseScrollStartPos = _camera.ScreenToWorldPoint(Input.mousePosition);
-
+            
             if (Input.GetMouseButton(0))
             {
-                var movement = Vector3.zero;
-                movement = _camera.ScreenToWorldPoint(Input.mousePosition) - _mouseScrollStartPos;
-                
+                var movement = _camera.ScreenToWorldPoint(Input.mousePosition) - _mouseScrollStartPos;
                 _camera.transform.position -= movement;
             }
-
+            
             CheckLimits();
         }
 
