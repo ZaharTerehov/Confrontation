@@ -8,9 +8,13 @@ namespace Gameplay.Units
     public class Unit : MonoBehaviour
     {
         [SerializeField] private Collider2D _unit;
+        
         [SerializeField] private Animator _movingAnimation;
         [SerializeField] private Animator _selectedAnimation;
+        [SerializeField] private Animator _targetAnimation;
+        
         [SerializeField] private GameObject _selected;
+        [SerializeField] private GameObject _target;
         
         private bool _isSelected;
         private static Unit _instance;
@@ -20,6 +24,7 @@ namespace Gameplay.Units
             _instance = this;
             
             MoveOnTilemapService.EndMovement += OnSetIdleAnimation;
+            MoveOnTilemapService.EndPosition += OnSetTargetAnimation;
             _movingAnimation.SetTrigger("Idle");
         }
 
@@ -44,12 +49,24 @@ namespace Gameplay.Units
                 MoveOnTilemap.MoveUnit(gameObject);
                 _selectedAnimation.SetTrigger("Selected");
                 _selected.SetActive(false);
+                
+ 
             }
         }
 
         private static void OnSetIdleAnimation()
         {
             _instance._movingAnimation.SetTrigger("Idle");
+            
+            _instance._target.SetActive(false);
+            _instance._targetAnimation.SetTrigger("Target");
+        }
+        
+        private static void OnSetTargetAnimation(Vector3 position)
+        {
+            _instance._target.transform.position = position;
+            _instance._target.SetActive(true);
+            _instance._targetAnimation.SetTrigger("Target");
         }
     }
 }

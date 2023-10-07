@@ -12,10 +12,6 @@ namespace UI.Controllers
 {
     public class UIController : MonoBehaviour
     {
-        private static UIController _instance;
-
-        [Inject] private IUIService _uiWindowsManagerService;
-
         [Header("Windows")]
         [SerializeField] private Main _mainWindow;
         [SerializeField] private Hud _hudWindow;
@@ -50,8 +46,10 @@ namespace UI.Controllers
         public static Window PreviousWindow => _instance._previousWindow;
 		
         private Dictionary<Type, Window> _windowsDictionary = new Dictionary<Type, Window>();
-        private static readonly int LogoAnimation = Animator.StringToHash("LogoAnimation");
-        private static readonly int Play = Animator.StringToHash("Play");
+        
+        private static UIController _instance;
+
+        [Inject] private IUIService _uiWindowsManagerService;
 
         private void Awake()
         {
@@ -71,7 +69,7 @@ namespace UI.Controllers
         private async void PlayAnimationClip()
         {
             _loadWindow.SetActive(true);
-            _animator.SetTrigger(Play);
+            _animator.SetTrigger("Play");
 
             while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1)
             {
@@ -87,7 +85,7 @@ namespace UI.Controllers
             _instance._uiWindowsManagerService.FillDictionary(_windowsDictionary, _windows);
         }
 
-        public static async UniTask Open<T>()
+        public static void Open<T>()
         {
             _instance._previousWindow = _instance._uiWindowsManagerService.CloseCurrent(_instance._currentWindow);
             _instance._currentWindow = _instance._uiWindowsManagerService.Open<T>(_instance._windowsDictionary);

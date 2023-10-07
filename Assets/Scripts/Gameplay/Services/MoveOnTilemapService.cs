@@ -5,7 +5,6 @@ using Aoiti.Pathfinding;
 using DG.Tweening;
 using Gameplay.Interfaces;
 using Gameplay.Structures;
-using Gameplay.Units;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -25,7 +24,8 @@ namespace Gameplay.Services
         private Camera _camera;
         
         public static event Action EndMovement;
-        
+        public static event Action<Vector3> EndPosition;
+
         public void InitPathfinder(TileAndMovementCost[] tiles, Tilemap tilemap)
         {
             _tiles = tiles;
@@ -58,8 +58,11 @@ namespace Gameplay.Services
             {
                 foreach (var tileAndMovementCost in _tiles)
                 {
-                    if (_tilemap.GetTile(a + direction) != tileAndMovementCost.tile) continue;
-                    if (tileAndMovementCost.movable) result.Add(a + direction, tileAndMovementCost.movementCost);
+                    if (_tilemap.GetTile(a + direction) != tileAndMovementCost.tile) 
+                        continue;
+                    
+                    if (tileAndMovementCost.movable) 
+                        result.Add(a + direction, tileAndMovementCost.movementCost);
                 }
             }
 
@@ -68,6 +71,7 @@ namespace Gameplay.Services
 
         public void Move(GameObject gameObject, List<Vector3Int> path, Tilemap tilemap)
         {
+            EndPosition?.Invoke(_tilemap.CellToWorld(path[path.Count-1]));
             _sequence = DOTween.Sequence().SetSpeedBased();
 
             foreach (var position in path)
