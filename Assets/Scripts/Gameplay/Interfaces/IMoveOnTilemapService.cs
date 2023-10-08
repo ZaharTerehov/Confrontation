@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Gameplay.Services;
 using Gameplay.Structures;
 using UnityEngine;
@@ -8,6 +9,9 @@ namespace Gameplay.Interfaces
 {
     public interface IMoveOnTilemapService
     {
+        public event Action EndMovement;
+        public event Action<Vector3> EndPosition;
+        
         public void InitPathfinder(TileAndMovementCost[] tiles, Tilemap tilemap);
         
         public void MoveUnit(GameObject gameObject);

@@ -22,9 +22,9 @@ namespace Gameplay.Services
         private TileAndMovementCost[] _tiles;
         private Tilemap _tilemap;
         private Camera _camera;
-        
-        public static event Action EndMovement;
-        public static event Action<Vector3> EndPosition;
+
+        public event Action EndMovement;
+        public event Action<Vector3> EndPosition;
 
         public void InitPathfinder(TileAndMovementCost[] tiles, Tilemap tilemap)
         {
