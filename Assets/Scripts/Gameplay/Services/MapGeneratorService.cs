@@ -1,8 +1,10 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.Services
 {
@@ -10,9 +12,12 @@ namespace Gameplay.Services
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
         
+        public static event Action<Vector3Int> _tilemapGenerationIsFinished;
+        
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
         {
             _currentPositions.Clear();
+            tilemap.ClearAllTiles();
             
             for (var x = 0; x < levelSettingsData.GridSize.x; x++)
             {
@@ -39,6 +44,9 @@ namespace Gameplay.Services
             {
                 AddRandom(position, tilemap, levelSettingsData);
             }
+            
+            _tilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)));
+            _tilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)));
         }
 
         public void SetRandomTile(Vector3Int spawnPosition, LevelSettingData levelSettingsData, Tilemap tilemap)
@@ -53,7 +61,7 @@ namespace Gameplay.Services
             {
                 for (var i = -4; i < 5; i++)
                 {
-                    for (var j = Random.Range(1, -3); j < 5; j++)
+                    for (var j = Random.Range(1, -1); j < 5; j++)
                     {
                         tilemap.SetTile(new Vector3Int(spawnPosition.x - j,
                             spawnPosition.y + i), levelSettingsData.EdgeTile);
@@ -65,7 +73,7 @@ namespace Gameplay.Services
             {
                 for (var i = -4; i < 5; i++)
                 {
-                    for (var j = Random.Range(1, -3); j < 5; j++)
+                    for (var j = Random.Range(1, -1); j < 5; j++)
                     {
                         tilemap.SetTile(new Vector3Int(spawnPosition.x + j, spawnPosition.y - i), 
                             levelSettingsData.EdgeTile);
@@ -75,7 +83,7 @@ namespace Gameplay.Services
 
             else if (spawnPosition.y == 0)
             {
-                for (var i = Random.Range(1, -3); i < 5; i++)
+                for (var i = Random.Range(1, -1); i < 5; i++)
                 {
                     tilemap.SetTile(new Vector3Int(spawnPosition.x, spawnPosition.y - i), 
                         levelSettingsData.EdgeTile);
@@ -84,7 +92,7 @@ namespace Gameplay.Services
 
             else if (spawnPosition.y == levelSettingsData.GridSize.y - 1)
             {
-                for (var i = Random.Range(1, -3); i < 5; i++)
+                for (var i = Random.Range(1, -1); i < 5; i++)
                 {
                     tilemap.SetTile(new Vector3Int(spawnPosition.x, spawnPosition.y + i), 
                         levelSettingsData.EdgeTile);
