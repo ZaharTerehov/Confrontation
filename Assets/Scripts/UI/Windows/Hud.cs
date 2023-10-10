@@ -1,4 +1,5 @@
 ﻿
+using System;
 using TMPro;
 using UI.Controllers;
 using UI.Services;
@@ -11,6 +12,8 @@ namespace UI.Windows
     {
         [SerializeField] private Button _back;
         [SerializeField] private TMP_Text _gold;
+
+        public event Action ExitFromPlaying;
         
         private void Start()
         {
@@ -21,6 +24,8 @@ namespace UI.Windows
         {
             UIController.Open<CampaignMap>();
             UIController.MapWindow.SetActive(false);
+            
+            ExitFromPlaying?.Invoke();
         }
 
         public void SetGold(int gold)

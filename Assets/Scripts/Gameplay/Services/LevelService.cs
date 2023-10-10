@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Gameplay.Controllers;
 using Gameplay.Interfaces;
@@ -12,6 +13,8 @@ namespace Gameplay.Services
     {
         private int _currentLevel;
         private LevelSettingData _currentLevelSettingData;
+
+        public event Action LevelLoaded;
         
         public int PassedLevels
         {
@@ -37,6 +40,8 @@ namespace Gameplay.Services
             _currentLevelSettingData = levelData[selectedLevel];
 
             mapGeneratorController.GenerateLevel(_currentLevelSettingData);
+            
+            LevelLoaded?.Invoke();
         }
 
         public bool CheckLevelSelection(int selectedLevel)

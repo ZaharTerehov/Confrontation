@@ -13,9 +13,13 @@ namespace Gameplay.Controllers
         
         [Inject] private IMapGeneratorService _mapGeneratorService;
         [Inject] private IBuilderService _builderService;
+
+        private static BuilderController _instance;
         
         private void Start()
         {
+            _instance = this;
+            
             _tilemap.ClearAllTiles();
             _mapGeneratorService.TilemapGenerationIsFinished += InitCapital;
         }
@@ -23,6 +27,11 @@ namespace Gameplay.Controllers
         private void InitCapital(Vector3Int position)
         {
             _builderService.InitCapital(position, _tilemap, _capital);
+        }
+
+        public static void ClearAllCapital()
+        {
+            _instance._tilemap.ClearAllTiles();
         }
     }
 }

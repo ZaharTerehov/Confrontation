@@ -21,21 +21,38 @@ namespace Gameplay.Controllers
         [Inject] private IResourceService _resourceService;
 
         private float _time;
-        
+        private bool _levelIsLoaded;
+
+        private static ResourceController _instance;
 
         private void Start()
         {
+            _instance = this;
             _time = 0f;
         }
         
-        private void Update() 
+        private void Update()
         {
-            _time += Time.deltaTime;
+            if (!_levelIsLoaded) 
+                return;
             
+            _time += Time.deltaTime;
+                
             while(_time >= _interval) {
                 _resourceService.ResourceProduction(_unitsPerSecond, _unitRecruitmentRate, _goldPerSecond);
                 _time -= _interval;
             }
+        }
+
+        public static void LoadLevel()
+        {
+            _instance._levelIsLoaded = true;
+        }
+        
+        public static void ExitLevel()
+        {
+            _instance._levelIsLoaded = false;
+            _instance._resourceService.ResetResource();
         }
     }
 }

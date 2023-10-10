@@ -8,5 +8,7 @@ namespace Gameplay.Interfaces
         public event Action<int> AddGold;
 
         public void ResourceProduction(float unitsPerSecond, float unitRecruitmentRate, int goldPerSecond);
+
+        public void ResetResource();
     }
 }

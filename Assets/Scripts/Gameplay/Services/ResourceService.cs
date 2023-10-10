@@ -8,13 +8,21 @@ namespace Gameplay.Services
     {
         private float _unitsCapital;
         private int _gold;
-        
+
         public event Action<int> AddGold;
         
         public void ResourceProduction(float unitsPerSecond, float unitRecruitmentRate, int goldPerSecond)
         {
             _unitsCapital += unitsPerSecond * unitRecruitmentRate;
             _gold += goldPerSecond;
+            
+            AddGold?.Invoke(_gold);
+        }
+
+        public void ResetResource()
+        {
+            _unitsCapital = 0;
+            _gold = 0;
             
             AddGold?.Invoke(_gold);
         }

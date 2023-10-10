@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Gameplay.Controllers;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Gameplay.Interfaces
 {
     public interface ILevelService
     {
+        public event Action LevelLoaded;
+        
         public int PassedLevels
         {
             get => PlayerPrefs.GetInt("PassedLevels");
