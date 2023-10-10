@@ -17,6 +17,7 @@ namespace Installers
             Container.Bind<ILevelService>().To<LevelService>().AsSingle();
             Container.Bind<IMoveOnTilemapService>().To<MoveOnTilemapService>().AsSingle();
             Container.Bind<IUnitService>().To<UnitService>().AsSingle();
+            Container.Bind<IBuilderService>().To<BuilderService>().AsSingle();
         }
     }
 }

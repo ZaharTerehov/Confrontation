@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -6,6 +7,8 @@ namespace Gameplay.Interfaces
 {
     public interface IMapGeneratorService
     {
+        public event Action<Vector3Int> TilemapGenerationIsFinished;
+        
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect);
 
         public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap);

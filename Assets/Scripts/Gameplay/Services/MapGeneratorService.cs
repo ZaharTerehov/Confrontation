@@ -11,9 +11,9 @@ namespace Gameplay.Services
     public class MapGeneratorService : IMapGeneratorService
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
-        
-        public static event Action<Vector3Int> _tilemapGenerationIsFinished;
-        
+
+        public event Action<Vector3Int> TilemapGenerationIsFinished;
+
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
         {
             _currentPositions.Clear();
@@ -45,8 +45,8 @@ namespace Gameplay.Services
                 AddRandom(position, tilemap, levelSettingsData);
             }
             
-            _tilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)));
-            _tilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)));
+            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)));
+            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)));
         }
 
         public void SetRandomTile(Vector3Int spawnPosition, LevelSettingData levelSettingsData, Tilemap tilemap)
