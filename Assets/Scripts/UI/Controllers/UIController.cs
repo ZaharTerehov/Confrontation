@@ -5,6 +5,7 @@ using UI.Windows;
 using UnityEngine;
 using System;
 using Cysharp.Threading.Tasks;
+using Gameplay.Interfaces;
 using UI.Services;
 using Zenject;
 
@@ -50,6 +51,7 @@ namespace UI.Controllers
         private static UIController _instance;
 
         [Inject] private IUIService _uiWindowsManagerService;
+        [Inject] private IResourceService _resourceService;
 
         private void Awake()
         {
@@ -64,6 +66,8 @@ namespace UI.Controllers
         private void Start()
         {
             PlayAnimationClip();
+
+            _resourceService.AddGold += _hudWindow.SetGold;
         }
         
         private async void PlayAnimationClip()
