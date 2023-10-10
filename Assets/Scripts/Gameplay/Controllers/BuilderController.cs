@@ -1,7 +1,8 @@
 ﻿
-using Gameplay.Services;
+using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Zenject;
 
 namespace Gameplay.Controllers
 {
@@ -10,16 +11,18 @@ namespace Gameplay.Controllers
         [SerializeField] private Tile _capital;
         [SerializeField] private Tilemap _tilemap;
         
+        [Inject] private IMapGeneratorService _mapGeneratorService;
+        [Inject] private IBuilderService _builderService;
+        
         private void Start()
         {
             _tilemap.ClearAllTiles();
-            _tilemap.ClearAllEditorPreviewTiles();
-            MapGeneratorService._tilemapGenerationIsFinished += InitCapital;
+            _mapGeneratorService.TilemapGenerationIsFinished += InitCapital;
         }
 
         private void InitCapital(Vector3Int position)
         {
-            _tilemap.SetTile(position, _capital);
+            _builderService.InitCapital(position, _tilemap, _capital);
         }
     }
 }
