@@ -7,6 +7,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Gameplay.Controllers;
 using Gameplay.Interfaces;
+using Gameplay.Interfaces.ConstructionElements;
 using UI.Element;
 using UI.Services;
 using Zenject;
@@ -24,7 +25,7 @@ namespace UI.Controllers
         [SerializeField] private Store _storeWindow;
         [SerializeField] private Academy _academyWindow;
         [SerializeField] private Exit _exitWindow;
-        
+
         [Space]
         [SerializeField] private TextBoxCapital _textBoxCapital;
         
@@ -56,7 +57,7 @@ namespace UI.Controllers
         private static UIController _instance;
 
         [Inject] private IUIService _uiWindowsManagerService;
-        [Inject] private IResourceService _resourceService;
+        [Inject] private ICapitalService _capitalService;
         [Inject] private ILevelService _levelService;
         [Inject] private IBoardService _builderService;
 
@@ -74,7 +75,10 @@ namespace UI.Controllers
         {
             PlayAnimationClip();
 
-            _resourceService.AddGold += _hudWindow.SetGold;
+            _capitalService.AddGold += _hudWindow.SetGold;
+            _capitalService.AddGold += _textBoxCapital.SetGoldCount;
+            
+            _capitalService.AddUnits += _textBoxCapital.SetUnitCount;
             
             _levelService.LevelLoaded += ResourceController.LoadLevel;
             _hudWindow.ExitFromPlaying += ResourceController.ExitLevel;

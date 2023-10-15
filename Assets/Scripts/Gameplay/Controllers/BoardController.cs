@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Gameplay.ConstructionElements;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -15,7 +14,6 @@ namespace Gameplay.Controllers
         private Camera _camera;
 
         [SerializeField] private Tile _capital;
-        // [SerializeField] private Capital _capital;
         [SerializeField] private Tilemap _tilemap;
         
         [Inject] private IBoardService _builderService;

@@ -1,6 +1,8 @@
 ﻿
 using Gameplay.Interfaces;
+using Gameplay.Interfaces.ConstructionElements;
 using Gameplay.Services;
+using Gameplay.Services.ConstructionElements;
 using UI.Interfaces;
 using UI.Services;
 using Zenject;
@@ -20,6 +22,7 @@ namespace Installers
             Container.Bind<IBuilderService>().To<BuilderService>().AsSingle();
             Container.Bind<IResourceService>().To<ResourceService>().AsSingle();
             Container.Bind<IBoardService>().To<BoardService>().AsSingle();
+            Container.Bind<ICapitalService>().To<CapitalService>().AsSingle();
         }
     }
 }

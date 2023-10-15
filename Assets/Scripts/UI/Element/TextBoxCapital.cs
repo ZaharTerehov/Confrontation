@@ -22,14 +22,14 @@ namespace UI.Element
             _lvl.text = _lvl.text + level.ToString();
         }
         
-        private void SetUnitCount(float unitCount)
+        public void SetUnitCount(float unitCount)
         {
-            _unitCount.text = _unitCount.text + unitCount.ToString();
+            _unitCount.text = "Gold \n" + unitCount.ToString("0.0");
         }
         
-        private void SetGoldCount(float goldCount)
+        public void SetGoldCount(int goldCount)
         {
-            _goldCount.text = _goldCount.text + goldCount.ToString();
+            _goldCount.text = "Unit \n" + goldCount;
         }
         
         private void SetUnitPS(float unitPS)
