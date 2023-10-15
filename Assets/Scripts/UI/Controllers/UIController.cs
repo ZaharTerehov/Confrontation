@@ -7,6 +7,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Gameplay.Controllers;
 using Gameplay.Interfaces;
+using UI.Element;
 using UI.Services;
 using Zenject;
 
@@ -23,6 +24,9 @@ namespace UI.Controllers
         [SerializeField] private Store _storeWindow;
         [SerializeField] private Academy _academyWindow;
         [SerializeField] private Exit _exitWindow;
+        
+        [Space]
+        [SerializeField] private TextBoxCapital _textBoxCapital;
         
         [Space]
         [Header("LoadWindow")]
@@ -54,6 +58,7 @@ namespace UI.Controllers
         [Inject] private IUIService _uiWindowsManagerService;
         [Inject] private IResourceService _resourceService;
         [Inject] private ILevelService _levelService;
+        [Inject] private IBoardService _builderService;
 
         private void Awake()
         {
@@ -70,9 +75,13 @@ namespace UI.Controllers
             PlayAnimationClip();
 
             _resourceService.AddGold += _hudWindow.SetGold;
+            
             _levelService.LevelLoaded += ResourceController.LoadLevel;
             _hudWindow.ExitFromPlaying += ResourceController.ExitLevel;
             _hudWindow.ExitFromPlaying += BuilderController.ClearAllCapital;
+
+            _builderService.ClickOnCapital += _textBoxCapital.Open;
+            _builderService.ClickNotOnCapital += _textBoxCapital.Close;
         }
         
         private async void PlayAnimationClip()
@@ -84,7 +93,7 @@ namespace UI.Controllers
             {
                 await UniTask.Yield();
             }
-            
+
             _loadWindow.SetActive(false);
             Open<Main>();
         }

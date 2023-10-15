@@ -19,6 +19,7 @@ namespace Installers
             Container.Bind<IUnitService>().To<UnitService>().AsSingle();
             Container.Bind<IBuilderService>().To<BuilderService>().AsSingle();
             Container.Bind<IResourceService>().To<ResourceService>().AsSingle();
+            Container.Bind<IBoardService>().To<BoardService>().AsSingle();
         }
     }
 }
