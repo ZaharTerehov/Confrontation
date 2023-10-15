@@ -1,10 +1,11 @@
 ﻿
+using Gameplay.Interfaces;
 using UnityEngine;
-using Gameplay.Controllers;
+using Zenject;
 
-namespace Gameplay.Units
+namespace Gameplay.Controllers.Units
 {
-    public class Unit : MonoBehaviour
+    public class UnitController : MonoBehaviour
     {
         [SerializeField] private Collider2D _unit;
         
@@ -15,24 +16,31 @@ namespace Gameplay.Units
         [SerializeField] private GameObject _selected;
         [SerializeField] private GameObject _target;
         
+        [Inject] private IUnitService _unitService;
+
         private bool _isSelected;
         private Camera _camera;
 
         private void Start()
         {
+            InitUnit();
+            
             _movingAnimation.SetTrigger("Idle");
             _camera = Camera.main;
         }
 
         private void Update()
         {
-            if (!Input.GetMouseButtonDown(0)) return;
+            if (!Input.GetMouseButtonDown(0)) 
+                return;
             
             var mousePosition = _camera.ScreenToWorldPoint(Input.touches[0].position);
             var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
             if (hit.collider == _unit && !_isSelected)
             {
+                _unitService.OnUnitSelected();
+                
                 _isSelected = true;
                 _selected.SetActive(true);
                 _selectedAnimation.SetTrigger("Selected");
@@ -40,6 +48,8 @@ namespace Gameplay.Units
 
             else if (_isSelected)
             {
+                _unitService.OnUnitNotSelected();
+                
                 _movingAnimation.SetTrigger("Walk");
                 _isSelected = false;
                 MoveOnTilemap.MoveUnit(gameObject);
@@ -61,6 +71,11 @@ namespace Gameplay.Units
             _target.transform.position = position;
             _target.SetActive(true);
             _targetAnimation.SetTrigger("Target");
+        }
+        
+        private void InitUnit()
+        {
+            _unitService.InitUnit(this);
         }
     }
 }

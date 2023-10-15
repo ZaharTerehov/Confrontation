@@ -28,6 +28,7 @@ namespace UI.Controllers
 
         [Space]
         [SerializeField] private TextBoxCapital _textBoxCapital;
+        [SerializeField] private TextBoxUnit _textBoxUnit;
         
         [Space]
         [Header("LoadWindow")]
@@ -60,6 +61,7 @@ namespace UI.Controllers
         [Inject] private ICapitalService _capitalService;
         [Inject] private ILevelService _levelService;
         [Inject] private IBoardService _builderService;
+        [Inject] private IUnitService _unitService;
 
         private void Awake()
         {
@@ -86,6 +88,9 @@ namespace UI.Controllers
 
             _builderService.ClickOnCapital += _textBoxCapital.Open;
             _builderService.ClickNotOnCapital += _textBoxCapital.Close;
+            
+            _unitService.UnitSelected += _textBoxUnit.Open;
+            _unitService.UnitNotSelected += _textBoxUnit.Close;
         }
         
         private async void PlayAnimationClip()
