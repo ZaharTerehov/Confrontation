@@ -45,9 +45,7 @@ namespace UI.Element
         public void Open()
         {
             if(_isOpen) return;
-            
             _animator.SetTrigger("Open");
-            
             _isOpen = true;
         }
 
