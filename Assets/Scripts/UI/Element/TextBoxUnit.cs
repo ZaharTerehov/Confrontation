@@ -32,7 +32,7 @@ namespace UI.Element
         
         public void SetPower(int power)
         {
-            _power.text = "Gold \n" + power;
+            _power.text = "Power \n" + power;
         }
     }
 }

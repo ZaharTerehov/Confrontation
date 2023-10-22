@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using Cysharp.Threading.Tasks;
 using Gameplay.Controllers;
+using Gameplay.Controllers.ConstructionElements;
 using Gameplay.Interfaces;
 using Gameplay.Interfaces.ConstructionElements;
 using UI.Element;
@@ -95,6 +96,8 @@ namespace UI.Controllers
             
             _builderService.ClickOnCapital += _buttonsPanel.Open;
             _builderService.ClickNotOnCapital += _buttonsPanel.Close;
+
+            _buttonsPanel.SendUnits += CapitalController.SendUnit;
         }
         
         private async void PlayAnimationClip()

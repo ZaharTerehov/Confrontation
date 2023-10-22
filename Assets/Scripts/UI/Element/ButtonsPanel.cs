@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,18 @@ namespace UI.Element
         [SerializeField] private Animator _animator;
         
         private bool _isOpen;
+
+        public event Action SendUnits;
+
+        private void Start()
+        {
+            _sendUnits.onClick.AddListener(ClickButtonSendUnits);
+        }
+
+        private void ClickButtonSendUnits()
+        {
+            SendUnits?.Invoke();
+        }
         
         public void Open()
         {

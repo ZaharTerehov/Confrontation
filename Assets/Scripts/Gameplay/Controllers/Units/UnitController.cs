@@ -24,7 +24,7 @@ namespace Gameplay.Controllers.Units
         private void Start()
         {
             InitUnit();
-            
+
             _movingAnimation.SetTrigger("Idle");
             _camera = Camera.main;
         }
@@ -77,5 +77,7 @@ namespace Gameplay.Controllers.Units
         {
             _unitService.InitUnit(this);
         }
+        
+        public class Factory : PlaceholderFactory<UnitController> {}
     }
 }
