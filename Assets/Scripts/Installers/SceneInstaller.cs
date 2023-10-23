@@ -13,7 +13,7 @@ namespace Installers
 {
     public class SceneInstaller : MonoInstaller
     {
-        [SerializeField] private UnitController _unitController;
+        [SerializeField] private GameObject _unit;
         
         public override void InstallBindings()
         {
@@ -23,7 +23,7 @@ namespace Installers
             Container.Bind<ILevelService>().To<LevelService>().AsSingle();
             Container.Bind<IMoveOnTilemapService>().To<MoveOnTilemapService>().AsSingle();
             Container.Bind<IUnitService>().To<UnitService>().AsSingle();
-            Container.BindFactory<UnitController, UnitController.Factory>().FromComponentInNewPrefab(_unitController);
+            Container.BindFactory<UnitController, UnitController.Factory>().FromComponentInNewPrefab(_unit);
             Container.Bind<IBuilderService>().To<BuilderService>().AsSingle();
             Container.Bind<IResourceService>().To<ResourceService>().AsSingle();
             Container.Bind<IBoardService>().To<BoardService>().AsSingle();
