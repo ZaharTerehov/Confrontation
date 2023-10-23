@@ -21,10 +21,12 @@ namespace Gameplay.Services
         
         private int _countUnit;
 
-        public void InitUnit(UnitController unitController)
+        public void InitUnit(UnitController unitController, int countUnit)
         {
             _moveOnTilemapService.EndMovement += unitController.OnSetIdleAnimation;
             _moveOnTilemapService.EndPosition += unitController.OnSetTargetAnimation;
+
+            _countUnit = countUnit;
         }
 
         public void OnUnitSelected() => UnitSelected?.Invoke();

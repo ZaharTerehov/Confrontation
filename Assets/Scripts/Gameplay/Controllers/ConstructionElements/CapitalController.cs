@@ -23,14 +23,12 @@ namespace Gameplay.Controllers.ConstructionElements
 
         public static void SendUnit()
         {
-            if (!(_instance._capitalService.GetUnits() > 0)) 
+            var unitInCapital = _instance._capitalService.GetUnits();
+            
+            if (unitInCapital == 0)
                 return;
             
-            var unit = SpawnController.SpawnUnit();
-            var position = _instance._tilemap.GetCellCenterWorld(new Vector3Int(Position.x, 
-                Position.y + 1));
-
-            unit.transform.position = new Vector3(position.x, position.y + 0.3f);
+            SpawnController.SpawnUnit(unitInCapital);
         }
     }
 }

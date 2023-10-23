@@ -10,6 +10,6 @@ namespace Gameplay.Interfaces.ConstructionElements
         
         public void ResourceProduction();
 
-        public float GetUnits();
+        public int GetUnits();
     }
 }
