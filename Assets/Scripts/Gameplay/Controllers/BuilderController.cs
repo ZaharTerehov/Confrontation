@@ -1,4 +1,5 @@
 ﻿
+using Gameplay.Controllers.ConstructionElements;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -24,8 +25,11 @@ namespace Gameplay.Controllers
             _mapGeneratorService.TilemapGenerationIsFinished += InitCapital;
         }
 
-        private void InitCapital(Vector3Int position)
+        private void InitCapital(Vector3Int position, bool isAlly = false)
         {
+            if(isAlly)
+                CapitalController.Position = position;
+            
             _builderService.InitCapital(position, _tilemap, _capital);
         }
 

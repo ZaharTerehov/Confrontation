@@ -9,5 +9,7 @@ namespace Gameplay.Interfaces.ConstructionElements
         public event Action<float> AddUnits;
         
         public void ResourceProduction();
+
+        public int GetUnits();
     }
 }

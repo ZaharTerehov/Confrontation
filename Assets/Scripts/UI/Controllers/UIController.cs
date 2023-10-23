@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using Cysharp.Threading.Tasks;
 using Gameplay.Controllers;
+using Gameplay.Controllers.ConstructionElements;
 using Gameplay.Interfaces;
 using Gameplay.Interfaces.ConstructionElements;
 using UI.Element;
@@ -29,6 +30,7 @@ namespace UI.Controllers
         [Space]
         [SerializeField] private TextBoxCapital _textBoxCapital;
         [SerializeField] private TextBoxUnit _textBoxUnit;
+        [SerializeField] private ButtonsPanel _buttonsPanel;
         
         [Space]
         [Header("LoadWindow")]
@@ -91,6 +93,11 @@ namespace UI.Controllers
             
             _unitService.UnitSelected += _textBoxUnit.Open;
             _unitService.UnitNotSelected += _textBoxUnit.Close;
+            
+            _builderService.ClickOnCapital += _buttonsPanel.Open;
+            _builderService.ClickNotOnCapital += _buttonsPanel.Close;
+
+            _buttonsPanel.SendUnits += CapitalController.SendUnit;
         }
         
         private async void PlayAnimationClip()

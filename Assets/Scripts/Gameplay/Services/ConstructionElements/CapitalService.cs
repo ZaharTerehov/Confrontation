@@ -6,10 +6,10 @@ namespace Gameplay.Services.ConstructionElements
 {
     public class CapitalService : ICapitalService
     {
-        private float _unitsCapital;
+        private int _unitsCapital;
         private int _gold;
-        
-        private float _unitsPerSecond = 1f;
+
+        private int _unitsPerSecond = 1;
         
         private int _goldPerSecond = 1;
 
@@ -24,5 +24,7 @@ namespace Gameplay.Services.ConstructionElements
             AddGold?.Invoke(_gold);
             AddUnits?.Invoke(_unitsCapital);
         }
+        
+        public int GetUnits() => _unitsCapital;
     }
 }

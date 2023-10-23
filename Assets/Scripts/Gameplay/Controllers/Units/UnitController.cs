@@ -21,14 +21,6 @@ namespace Gameplay.Controllers.Units
         private bool _isSelected;
         private Camera _camera;
 
-        private void Start()
-        {
-            InitUnit();
-            
-            _movingAnimation.SetTrigger("Idle");
-            _camera = Camera.main;
-        }
-
         private void Update()
         {
             if (!Input.GetMouseButtonDown(0)) 
@@ -73,9 +65,14 @@ namespace Gameplay.Controllers.Units
             _targetAnimation.SetTrigger("Target");
         }
         
-        private void InitUnit()
+        public void InitUnit(int countUnit)
         {
-            _unitService.InitUnit(this);
+            _movingAnimation.SetTrigger("Idle");
+            _camera = Camera.main;
+            
+            _unitService.InitUnit(this, countUnit);
         }
+        
+        public class Factory : PlaceholderFactory<UnitController> {}
     }
 }

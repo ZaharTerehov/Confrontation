@@ -9,7 +9,7 @@ namespace Gameplay.Interfaces
         public event Action UnitSelected;
         public event Action UnitNotSelected;
         
-        public void InitUnit(UnitController unitController);
+        public void InitUnit(UnitController unitController, int countUnit);
         
         public void OnUnitSelected();
         public void OnUnitNotSelected();

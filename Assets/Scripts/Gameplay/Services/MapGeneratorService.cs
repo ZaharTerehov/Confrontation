@@ -12,7 +12,7 @@ namespace Gameplay.Services
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
 
-        public event Action<Vector3Int> TilemapGenerationIsFinished;
+        public event Action<Vector3Int, bool> TilemapGenerationIsFinished;
 
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
         {
@@ -45,8 +45,8 @@ namespace Gameplay.Services
                 AddRandom(position, tilemap, levelSettingsData);
             }
             
-            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)));
-            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)));
+            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)), true);
+            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)), false);
         }
 
         public void SetRandomTile(Vector3Int spawnPosition, LevelSettingData levelSettingsData, Tilemap tilemap)

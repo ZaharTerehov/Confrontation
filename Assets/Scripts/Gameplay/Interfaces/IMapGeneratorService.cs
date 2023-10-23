@@ -7,7 +7,7 @@ namespace Gameplay.Interfaces
 {
     public interface IMapGeneratorService
     {
-        public event Action<Vector3Int> TilemapGenerationIsFinished;
+        public event Action<Vector3Int, bool> TilemapGenerationIsFinished;
         
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect);
 
