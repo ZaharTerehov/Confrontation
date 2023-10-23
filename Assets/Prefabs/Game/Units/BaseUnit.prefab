@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: _targetAnimation
       value: 
       objectReference: {fileID: 742090433859194385}
+    - target: {fileID: 5014369017844845656, guid: 1c335f99c32dad04bb9669fded3cf0d4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5014369017844845662, guid: 1c335f99c32dad04bb9669fded3cf0d4, type: 3}
       propertyPath: m_Name
       value: Unit(Knight)
@@ -209,3 +213,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5014369017844845652, guid: 1c335f99c32dad04bb9669fded3cf0d4, type: 3}
   m_PrefabInstance: {fileID: 2680663902768870437}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6964042286902409339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5014369017844845662, guid: 1c335f99c32dad04bb9669fded3cf0d4, type: 3}
+  m_PrefabInstance: {fileID: 2680663902768870437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &6556503776149594065
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6964042286902409339}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

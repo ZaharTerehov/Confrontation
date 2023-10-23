@@ -2,6 +2,7 @@
 using System;
 using Gameplay.Controllers.Units;
 using Gameplay.Interfaces;
+using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Services
@@ -32,5 +33,12 @@ namespace Gameplay.Services
         public void OnUnitSelected() => UnitSelected?.Invoke();
 
         public void OnUnitNotSelected() => UnitNotSelected?.Invoke();
+        
+        public int GetCountUnits() => _countUnit;
+        
+        public void CombineUnits(IUnitService unitService)
+        {
+            _countUnit += unitService.GetCountUnits();
+        }
     }
 }

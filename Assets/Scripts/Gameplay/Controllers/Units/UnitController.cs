@@ -72,7 +72,20 @@ namespace Gameplay.Controllers.Units
             
             _unitService.InitUnit(this, countUnit);
         }
-        
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            if(!gameObject.activeSelf) return;
+            
+            _unitService.CombineUnits(collider.gameObject.GetComponent<UnitController>().GetUnit());
+            collider.gameObject.SetActive(false);
+        }
+
+        private IUnitService GetUnit()
+        {
+            return _unitService;
+        }
+
         public class Factory : PlaceholderFactory<UnitController> {}
     }
 }

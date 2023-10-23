@@ -13,5 +13,8 @@ namespace Gameplay.Interfaces
         
         public void OnUnitSelected();
         public void OnUnitNotSelected();
+
+        public int GetCountUnits();
+        public void CombineUnits(IUnitService unitService);
     }
 }
