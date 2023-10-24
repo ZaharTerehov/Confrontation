@@ -13,7 +13,7 @@ namespace UI.Element
         
         private bool _isOpen;
         
-        public void Open()
+        public void OnOpen()
         {
             if(_isOpen) return;
             
@@ -22,7 +22,7 @@ namespace UI.Element
             _isOpen = true;
         }
 
-        public void Close()
+        public void OnClose()
         {
             if(!_isOpen) return;
             
@@ -30,9 +30,9 @@ namespace UI.Element
             _animator.SetTrigger("Close");
         }
         
-        public void SetPower(int power)
+        public void SetPower(float power)
         {
-            _power.text = "Power \n" + power;
+            _power.text = power.ToString();
         }
     }
 }

@@ -22,12 +22,12 @@ namespace UI.Element
             _lvl.text = _lvl.text + level.ToString();
         }
         
-        public void SetUnitCount(float unitCount)
+        public void OnSetUnitCount(float unitCount)
         {
             _unitCount.text = "Gold \n" + unitCount.ToString("0.0");
         }
         
-        public void SetGoldCount(int goldCount)
+        public void OnSetGoldCount(int goldCount)
         {
             _goldCount.text = "Unit \n" + goldCount;
         }
@@ -42,14 +42,14 @@ namespace UI.Element
             _goldPS.text = _goldPS.text + goldPS.ToString();
         }
 
-        public void Open()
+        public void OnOpen()
         {
             if(_isOpen) return;
             _animator.SetTrigger("Open");
             _isOpen = true;
         }
 
-        public void Close()
+        public void OnClose()
         {
             if(!_isOpen) return;
             

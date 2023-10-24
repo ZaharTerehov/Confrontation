@@ -28,7 +28,7 @@ namespace UI.Windows
             ExitFromPlaying?.Invoke();
         }
 
-        public void SetGold(int gold)
+        public void OnSetGold(int gold)
         {
             _gold.text = gold.ToString();
         }

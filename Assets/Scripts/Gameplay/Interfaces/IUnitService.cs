@@ -8,6 +8,8 @@ namespace Gameplay.Interfaces
     {
         public event Action UnitSelected;
         public event Action UnitNotSelected;
+
+        public event Action<float> CharacteristicsChanged;
         
         public void InitUnit(UnitController unitController, int countUnit);
         
@@ -15,6 +17,6 @@ namespace Gameplay.Interfaces
         public void OnUnitNotSelected();
 
         public int GetCountUnits();
-        public void CombineUnits(IUnitService unitService);
+        public void CombineUnits(int unitService);
     }
 }

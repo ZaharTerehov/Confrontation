@@ -24,7 +24,16 @@ namespace Gameplay.Services.ConstructionElements
             AddGold?.Invoke(_gold);
             AddUnits?.Invoke(_unitsCapital);
         }
-        
+
+        public void ResetResource()
+        {
+            _gold = 0;
+            _unitsCapital = 0;
+            
+            AddGold?.Invoke(_gold);
+            AddUnits?.Invoke(_unitsCapital);
+        }
+
         public int GetUnits() => _unitsCapital;
     }
 }

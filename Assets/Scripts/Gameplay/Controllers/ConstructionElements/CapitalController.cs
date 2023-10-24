@@ -1,15 +1,12 @@
 ﻿
 using Gameplay.Interfaces.ConstructionElements;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Zenject;
 
 namespace Gameplay.Controllers.ConstructionElements
 {
     public class CapitalController : MonoBehaviour
     {
-        [SerializeField] private Tilemap _tilemap;
-        
         [Inject] private ICapitalService _capitalService;
 
         private static CapitalController _instance;
@@ -21,7 +18,7 @@ namespace Gameplay.Controllers.ConstructionElements
             _instance = this;
         }
 
-        public static void SendUnit()
+        public static void OnSendUnit()
         {
             var unitInCapital = _instance._capitalService.GetUnits();
             

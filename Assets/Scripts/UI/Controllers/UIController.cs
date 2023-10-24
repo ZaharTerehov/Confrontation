@@ -79,25 +79,26 @@ namespace UI.Controllers
         {
             PlayAnimationClip();
 
-            _capitalService.AddGold += _hudWindow.SetGold;
-            _capitalService.AddGold += _textBoxCapital.SetGoldCount;
+            _capitalService.AddGold += _hudWindow.OnSetGold;
+            _capitalService.AddGold += _textBoxCapital.OnSetGoldCount;
             
-            _capitalService.AddUnits += _textBoxCapital.SetUnitCount;
+            _capitalService.AddUnits += _textBoxCapital.OnSetUnitCount;
             
-            _levelService.LevelLoaded += ResourceController.LoadLevel;
-            _hudWindow.ExitFromPlaying += ResourceController.ExitLevel;
-            _hudWindow.ExitFromPlaying += BuilderController.ClearAllCapital;
+            _levelService.LevelLoaded += ResourceController.OnLoadLevel;
+            _hudWindow.ExitFromPlaying += ResourceController.OnExitLevel;
+            _hudWindow.ExitFromPlaying += BuilderController.OnClearAllCapital;
 
-            _builderService.ClickOnCapital += _textBoxCapital.Open;
-            _builderService.ClickNotOnCapital += _textBoxCapital.Close;
+            _builderService.ClickOnCapital += _textBoxCapital.OnOpen;
+            _builderService.ClickNotOnCapital += _textBoxCapital.OnClose;
             
-            _unitService.UnitSelected += _textBoxUnit.Open;
-            _unitService.UnitNotSelected += _textBoxUnit.Close;
+            _unitService.UnitSelected += _textBoxUnit.OnOpen;
+            _unitService.UnitNotSelected += _textBoxUnit.OnClose;
+            _unitService.CharacteristicsChanged += _textBoxUnit.SetPower;
             
-            _builderService.ClickOnCapital += _buttonsPanel.Open;
-            _builderService.ClickNotOnCapital += _buttonsPanel.Close;
+            _builderService.ClickOnCapital += _buttonsPanel.OnOpen;
+            _builderService.ClickNotOnCapital += _buttonsPanel.OnClose;
 
-            _buttonsPanel.SendUnits += CapitalController.SendUnit;
+            _buttonsPanel.SendUnits += CapitalController.OnSendUnit;
         }
         
         private async void PlayAnimationClip()

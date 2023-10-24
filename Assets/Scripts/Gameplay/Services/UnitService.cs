@@ -2,7 +2,6 @@
 using System;
 using Gameplay.Controllers.Units;
 using Gameplay.Interfaces;
-using UnityEngine;
 using Zenject;
 
 namespace Gameplay.Services
@@ -14,11 +13,13 @@ namespace Gameplay.Services
         public event Action UnitSelected;
         public event Action UnitNotSelected;
         
-        private int _speed;
-        private int _power;
+        public event Action<float> CharacteristicsChanged;
         
-        private int _defensePercentage;
-        private int _attack;
+        private int _speed;
+        private float _power;
+        
+        private float _defensePercentage;
+        private float _attack;
         
         private int _countUnit;
 
@@ -28,6 +29,7 @@ namespace Gameplay.Services
             _moveOnTilemapService.EndPosition += unitController.OnSetTargetAnimation;
 
             _countUnit = countUnit;
+            CalculateCharacteristics(_countUnit);
         }
 
         public void OnUnitSelected() => UnitSelected?.Invoke();
@@ -36,9 +38,20 @@ namespace Gameplay.Services
         
         public int GetCountUnits() => _countUnit;
         
-        public void CombineUnits(IUnitService unitService)
+        public void CombineUnits(int unitCount)
         {
-            _countUnit += unitService.GetCountUnits();
+            _countUnit += unitCount;
+            CalculateCharacteristics(_countUnit);
+        }
+
+        private void CalculateCharacteristics(int unitCount)
+        {
+            _defensePercentage = 1.1f * unitCount;
+            _attack = 1.1f * unitCount;
+
+            _power = (_defensePercentage + _attack) / 2;
+            
+            CharacteristicsChanged?.Invoke(_power);
         }
     }
 }

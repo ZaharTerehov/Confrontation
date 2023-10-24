@@ -22,10 +22,10 @@ namespace Gameplay.Controllers
             _instance = this;
             
             _tilemap.ClearAllTiles();
-            _mapGeneratorService.TilemapGenerationIsFinished += InitCapital;
+            _mapGeneratorService.TilemapGenerationIsFinished += OnInitCapital;
         }
 
-        private void InitCapital(Vector3Int position, bool isAlly = false)
+        private void OnInitCapital(Vector3Int position, bool isAlly = false)
         {
             if(isAlly)
                 CapitalController.Position = position;
@@ -33,7 +33,7 @@ namespace Gameplay.Controllers
             _builderService.InitCapital(position, _tilemap, _capital);
         }
 
-        public static void ClearAllCapital()
+        public static void OnClearAllCapital()
         {
             _instance._tilemap.ClearAllTiles();
         }

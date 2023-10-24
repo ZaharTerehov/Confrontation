@@ -35,12 +35,12 @@ namespace Gameplay.Controllers
             }
         }
 
-        public static void LoadLevel()
+        public static void OnLoadLevel()
         {
             _instance._levelIsLoaded = true;
         }
         
-        public static void ExitLevel()
+        public static void OnExitLevel()
         {
             _instance._levelIsLoaded = false;
             _instance._resourceService.ResetResource();

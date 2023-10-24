@@ -69,7 +69,7 @@ namespace Gameplay.Controllers.Units
         {
             _movingAnimation.SetTrigger("Idle");
             _camera = Camera.main;
-            
+
             _unitService.InitUnit(this, countUnit);
         }
 
@@ -81,9 +81,9 @@ namespace Gameplay.Controllers.Units
             collider.gameObject.SetActive(false);
         }
 
-        private IUnitService GetUnit()
+        private int GetUnit()
         {
-            return _unitService;
+            return _unitService.GetCountUnits();
         }
 
         public class Factory : PlaceholderFactory<UnitController> {}

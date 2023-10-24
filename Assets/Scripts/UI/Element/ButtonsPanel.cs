@@ -26,14 +26,14 @@ namespace UI.Element
             SendUnits?.Invoke();
         }
         
-        public void Open()
+        public void OnOpen()
         {
             if(_isOpen) return;
             _animator.SetTrigger("Open");
             _isOpen = true;
         }
 
-        public void Close()
+        public void OnClose()
         {
             if(!_isOpen) return;
             _isOpen = false;
