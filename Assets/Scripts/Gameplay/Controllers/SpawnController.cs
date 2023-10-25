@@ -10,6 +10,7 @@ namespace Gameplay.Controllers
     public class SpawnController : MonoBehaviour
     {
         [SerializeField] private Tilemap _tilemap;
+        [SerializeField] private Transform _units;
         [Inject] private UnitController.Factory _factory;
 
         private static SpawnController _instance;
@@ -22,6 +23,8 @@ namespace Gameplay.Controllers
         public static void SpawnUnit(int countUnit)
         {
             var unit = _instance._factory.Create().gameObject;
+            var baseUnit = unit.transform.parent.gameObject;
+            baseUnit.transform.SetParent(_instance._units, false);
             
             unit.GetComponent<UnitController>().InitUnit(countUnit);
             

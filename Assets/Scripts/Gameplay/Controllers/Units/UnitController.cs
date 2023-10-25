@@ -12,6 +12,7 @@ namespace Gameplay.Controllers.Units
         [SerializeField] private Animator _movingAnimation;
         [SerializeField] private Animator _selectedAnimation;
         [SerializeField] private Animator _targetAnimation;
+        [SerializeField] private Animator _combineAnimation;
         
         [SerializeField] private GameObject _selected;
         [SerializeField] private GameObject _target;
@@ -79,6 +80,7 @@ namespace Gameplay.Controllers.Units
             
             _unitService.CombineUnits(collider.gameObject.GetComponent<UnitController>().GetUnit());
             collider.gameObject.SetActive(false);
+            _combineAnimation.SetTrigger("Combine");
         }
 
         private int GetUnit()
