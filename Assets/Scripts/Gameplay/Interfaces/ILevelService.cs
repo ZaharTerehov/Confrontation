@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Gameplay.Controllers;
+using Gameplay.SO;
 using UnityEngine;
 
 namespace Gameplay.Interfaces

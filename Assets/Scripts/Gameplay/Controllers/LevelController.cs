@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Gameplay.Interfaces;
+using Gameplay.SO;
 using UI.Controllers;
 using UnityEngine;
 using Zenject;

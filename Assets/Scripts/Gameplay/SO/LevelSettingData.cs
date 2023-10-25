@@ -1,9 +1,8 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Gameplay
+namespace Gameplay.SO
 {
     [CreateAssetMenu(fileName = "New LevelSettingData", menuName = "LevelSetting Data")]
     public class LevelSettingData : ScriptableObject

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Gameplay.Interfaces;
+using Gameplay.SO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Random = UnityEngine.Random;

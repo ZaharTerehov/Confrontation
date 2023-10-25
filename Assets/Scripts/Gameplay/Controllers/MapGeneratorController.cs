@@ -1,5 +1,6 @@
 ﻿
 using Gameplay.Interfaces;
+using Gameplay.SO;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Zenject;
