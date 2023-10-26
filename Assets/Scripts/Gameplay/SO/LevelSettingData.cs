@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -15,5 +16,17 @@ namespace Gameplay.SO
         
         [Header("Edge tile")]
         [SerializeField] public Tile EdgeTile;
+        
+        [Header("Settlement")]
+        [SerializeField] public Tile SettlementTile;
+        
+        [Header("Mine")]
+        [SerializeField] public Tile MineTile;
+        
+        [Header("Barracks")]
+        [SerializeField] public Tile BarracksTile;
+        
+        [Header("Stable")]
+        [SerializeField] public Tile StableTile;
     }
 }
