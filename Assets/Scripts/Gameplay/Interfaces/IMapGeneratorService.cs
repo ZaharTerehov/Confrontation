@@ -9,13 +9,12 @@ namespace Gameplay.Interfaces
     public interface IMapGeneratorService
     {
         public event Action<Vector3Int, bool> TilemapGenerationIsFinished;
+        public event Action<Vector3Int> SetSettlement;
         
-        public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect);
+        public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, Tilemap edgeTilemap, ref Rect rect);
 
-        public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap);
+        public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap, Tilemap edgeTilemap);
 
         public void SetRandomTile(Vector3Int spawnPosition, LevelSettingData levelSettingsData, Tilemap tilemap);
-
-        public void AddRandom(Vector3Int spawnPosition, Tilemap tilemap, LevelSettingData levelSettingsData);
     }
 }

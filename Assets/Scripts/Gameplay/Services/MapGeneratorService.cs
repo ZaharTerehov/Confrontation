@@ -12,40 +12,52 @@ namespace Gameplay.Services
     public class MapGeneratorService : IMapGeneratorService
     {
         private List<Vector3Int> _currentPositions = new List<Vector3Int>();
+        private List<Vector3Int> _currentPositionsEdge = new List<Vector3Int>();
 
         public event Action<Vector3Int, bool> TilemapGenerationIsFinished;
+        public event Action<Vector3Int> SetSettlement;
 
-        public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, ref Rect rect)
+        public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, Tilemap edgeTilemap, ref Rect rect)
         {
             _currentPositions.Clear();
             tilemap.ClearAllTiles();
-            
-            for (var x = 0; x < levelSettingsData.GridSize.x; x++)
+            edgeTilemap.ClearAllTiles();
+
+            _currentPositions = FillCurrentPosition(_currentPositions, levelSettingsData.GridSize);
+            _currentPositionsEdge = FillCurrentPosition(_currentPositionsEdge, 
+                new Vector2Int(levelSettingsData.GridSize.x + 10, levelSettingsData.GridSize.y + 10));
+
+            GameBoardFilling(levelSettingsData, tilemap, edgeTilemap);
+
+            rect = new Rect(edgeTilemap.localBounds.center - edgeTilemap.localBounds.extents, 
+                edgeTilemap.localBounds.size);
+        }
+
+        private List<Vector3Int> FillCurrentPosition(List<Vector3Int> list, Vector2Int gridSize)
+        {
+            for (var x = 0; x < gridSize.x; x++)
             {
-                for (var y = 0; y < levelSettingsData.GridSize.y; y++)
+                for (var y = 0; y < gridSize.y; y++)
                 {
-                    _currentPositions.Add(new Vector3Int(x, y, 0));
+                    list.Add(new Vector3Int(x, y, 0));
                 }
             }
 
-            GameBoardFilling(levelSettingsData, tilemap);
-            
-            rect = new Rect(tilemap.localBounds.center - tilemap.localBounds.extents, 
-                tilemap.localBounds.size);
+            return list;
         }
 
-        public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap)
+        public void GameBoardFilling(LevelSettingData levelSettingsData, Tilemap tilemap, Tilemap edgeTilemap)
         {
             foreach (var position in _currentPositions)
             {
                 SetRandomTile(position, levelSettingsData, tilemap);
             }
-            
-            foreach (var position in _currentPositions)
+
+            foreach (var position in _currentPositionsEdge)
             {
-                AddRandom(position, tilemap, levelSettingsData);
+                edgeTilemap.SetTile(position, levelSettingsData.EdgeTile);
             }
-            
+
             TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)), true);
             TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)), false);
         }
@@ -54,50 +66,10 @@ namespace Gameplay.Services
         {
             var tile = levelSettingsData.Tiles[Random.Range(0, levelSettingsData.Tiles.Count)];
             tilemap.SetTile(spawnPosition, tile);
-        }
 
-        public void AddRandom(Vector3Int spawnPosition, Tilemap tilemap, LevelSettingData levelSettingsData)
-        {
-            if (spawnPosition.x == 0)
+            if (Random.Range(1, 100) <= 8)
             {
-                for (var i = -4; i < 5; i++)
-                {
-                    for (var j = Random.Range(1, -1); j < 5; j++)
-                    {
-                        tilemap.SetTile(new Vector3Int(spawnPosition.x - j,
-                            spawnPosition.y + i), levelSettingsData.EdgeTile);
-                    }
-                }
-            }
-            
-            else if (spawnPosition.x == levelSettingsData.GridSize.x - 1)
-            {
-                for (var i = -4; i < 5; i++)
-                {
-                    for (var j = Random.Range(1, -1); j < 5; j++)
-                    {
-                        tilemap.SetTile(new Vector3Int(spawnPosition.x + j, spawnPosition.y - i), 
-                            levelSettingsData.EdgeTile);
-                    }
-                }
-            }
-
-            else if (spawnPosition.y == 0)
-            {
-                for (var i = Random.Range(1, -1); i < 5; i++)
-                {
-                    tilemap.SetTile(new Vector3Int(spawnPosition.x, spawnPosition.y - i), 
-                        levelSettingsData.EdgeTile);
-                }
-            }
-
-            else if (spawnPosition.y == levelSettingsData.GridSize.y - 1)
-            {
-                for (var i = Random.Range(1, -1); i < 5; i++)
-                {
-                    tilemap.SetTile(new Vector3Int(spawnPosition.x, spawnPosition.y + i), 
-                        levelSettingsData.EdgeTile);
-                }
+                SetSettlement?.Invoke(new Vector3Int(spawnPosition.x, spawnPosition.y));
             }
         }
     }

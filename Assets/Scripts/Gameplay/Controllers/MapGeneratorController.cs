@@ -11,6 +11,7 @@ namespace Gameplay.Controllers
     {
         [Header("Tilemap")]
         [SerializeField] private Tilemap _tilemap;
+        [SerializeField] private Tilemap _edgeTilemap;
 
         [Inject] private IMapGeneratorService _mapGeneratorService;
 
@@ -21,7 +22,7 @@ namespace Gameplay.Controllers
             _tilemap.ClearAllTiles();
             _tilemap.ClearAllEditorPreviewTiles();
             
-            _mapGeneratorService.GenerateLevel(levelSettingsData, _tilemap, ref Rect);
+            _mapGeneratorService.GenerateLevel(levelSettingsData, _tilemap, _edgeTilemap, ref Rect);
         }
     }
 }
