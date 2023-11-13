@@ -1,4 +1,5 @@
 ﻿
+using Gameplay.Controllers.ConstructionElements;
 using Gameplay.Controllers.Units;
 using Gameplay.Interfaces;
 using Gameplay.Interfaces.ConstructionElements;
@@ -14,6 +15,7 @@ namespace Installers
     public class SceneInstaller : MonoInstaller
     {
         [SerializeField] private GameObject _unit;
+        [SerializeField] private GameObject _settlement;
         
         public override void InstallBindings()
         {
@@ -28,6 +30,8 @@ namespace Installers
             Container.Bind<IResourceService>().To<ResourceService>().AsSingle();
             Container.Bind<IBoardService>().To<BoardService>().AsSingle();
             Container.Bind<ICapitalService>().To<CapitalService>().AsSingle();
+            Container.Bind<ISettlementService>().To<SettlementService>().AsSingle();
+            Container.BindFactory<SettlementController, SettlementController.Factory>().FromComponentInNewPrefab(_settlement);
         }
     }
 }

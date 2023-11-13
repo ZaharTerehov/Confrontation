@@ -28,9 +28,10 @@ namespace UI.Controllers
         [SerializeField] private Exit _exitWindow;
 
         [Space]
-        [SerializeField] private TextBoxCapital _textBoxCapital;
+        [SerializeField] private TextBoxBuilding textBoxBuilding;
         [SerializeField] private TextBoxUnit _textBoxUnit;
         [SerializeField] private ButtonsPanel _buttonsPanel;
+        [SerializeField] private TextBoxBuild _buildingPanel;
         
         [Space]
         [Header("LoadWindow")]
@@ -79,17 +80,19 @@ namespace UI.Controllers
         {
             PlayAnimationClip();
 
-            _capitalService.AddGold += _hudWindow.OnSetGold;
-            _capitalService.AddGold += _textBoxCapital.OnSetGoldCount;
-            
-            _capitalService.AddUnits += _textBoxCapital.OnSetUnitCount;
+            // _capitalService.AddGold += _hudWindow.OnSetGold;
+            // _capitalService.AddGold += textBoxBuilding.OnSetGoldCount;
+            //
+            // _capitalService.AddUnits += textBoxBuilding.OnSetUnitCount;
             
             _levelService.LevelLoaded += ResourceController.OnLoadLevel;
             _hudWindow.ExitFromPlaying += ResourceController.OnExitLevel;
+            
             _hudWindow.ExitFromPlaying += BuilderController.OnClearAllCapital;
+            _buildingPanel.ClickSettlementButton += BuilderController.BuildSettlement;
 
-            _builderService.ClickOnCapital += _textBoxCapital.OnOpen;
-            _builderService.ClickNotOnCapital += _textBoxCapital.OnClose;
+            _builderService.ClickOnCapital += textBoxBuilding.OnOpen;
+            _builderService.ClickNotOnCapital += textBoxBuilding.OnClose;
             
             _unitService.UnitSelected += _textBoxUnit.OnOpen;
             _unitService.UnitNotSelected += _textBoxUnit.OnClose;
@@ -99,6 +102,7 @@ namespace UI.Controllers
             _builderService.ClickNotOnCapital += _buttonsPanel.OnClose;
 
             _buttonsPanel.SendUnits += CapitalController.OnSendUnit;
+            _buttonsPanel.Building += _buildingPanel.OnOpen;
         }
         
         private async void PlayAnimationClip()
