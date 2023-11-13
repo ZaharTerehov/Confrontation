@@ -11,5 +11,10 @@ namespace Gameplay.Services
         {
             tilemap.SetTile(position, capital);
         }
+
+        public void Build()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

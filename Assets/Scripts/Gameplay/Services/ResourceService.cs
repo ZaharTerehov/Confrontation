@@ -21,5 +21,10 @@ namespace Gameplay.Services
         {
             _capitalService.ResetResource();
         }
+
+        public int GetCountGold()
+        {
+            return _capitalService.GetGold();
+        }
     }
 }

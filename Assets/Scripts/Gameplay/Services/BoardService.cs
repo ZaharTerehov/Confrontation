@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,12 +11,12 @@ namespace Gameplay.Services
     {
         public event Action ClickOnCapital;
         public event Action ClickNotOnCapital;
-        
-        public void ClickOnTilemap(Tilemap tilemap, Vector3Int position, Tile tile)
+
+        public void ClickOnTilemap(Tilemap tilemap, Vector3Int position, List<Tile> clickableTiles)
         {
-            if (tile == tilemap.GetTile<Tile>(position))
+            if (clickableTiles.Contains(tilemap.GetTile<Tile>(position)))
                 ClickOnCapital?.Invoke();
-            else if (tile != tilemap.GetTile<Tile>(position))
+            else if (!clickableTiles.Contains(tilemap.GetTile<Tile>(position)))
                 ClickNotOnCapital?.Invoke();
         }
     }
