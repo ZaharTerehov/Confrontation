@@ -1,11 +1,12 @@
 ﻿
 using Gameplay.Interfaces.ConstructionElements;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Gameplay.Controllers.ConstructionElements
 {
-    public class CapitalController : MonoBehaviour
+    public class CapitalController : MonoBehaviour, IPointerDownHandler
     {
         [Inject] private ICapitalService _capitalService;
 
@@ -26,6 +27,11 @@ namespace Gameplay.Controllers.ConstructionElements
                 return;
             
             SpawnController.SpawnUnit(unitInCapital);
+        }
+        
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
         }
     }
 }

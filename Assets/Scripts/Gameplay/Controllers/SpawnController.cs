@@ -11,7 +11,7 @@ namespace Gameplay.Controllers
     {
         [SerializeField] private Tilemap _tilemap;
         [SerializeField] private Transform _units;
-        [Inject] private UnitController.Factory _factory;
+        [Inject] private UnitController.Factory _unitControllerFactory;
 
         private static SpawnController _instance;
 
@@ -22,7 +22,7 @@ namespace Gameplay.Controllers
 
         public static void SpawnUnit(int countUnit)
         {
-            var unit = _instance._factory.Create().gameObject;
+            var unit = _instance._unitControllerFactory.Create().gameObject;
             var baseUnit = unit.transform.parent.gameObject;
             baseUnit.transform.SetParent(_instance._units, false);
             
