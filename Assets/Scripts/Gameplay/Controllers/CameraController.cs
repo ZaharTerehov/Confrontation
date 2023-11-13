@@ -35,18 +35,20 @@ namespace Gameplay.Controllers
         {
             var boundaries = MapGeneratorController.Rect;
 
-            if (boundaries.xMin - 1.5 > _camera.transform.position.x)
-                _camera.transform.position = new Vector3(boundaries.xMin - 1.5f, _camera.transform.position.y,
-                    _camera.transform.position.z);
+            var cameraPosition = _camera.transform.position;
+
+            if (boundaries.xMin - 4.5 > _camera.transform.position.x)
+                _camera.transform.position = new Vector3(boundaries.xMin - 4.5f, cameraPosition.y,
+                    cameraPosition.z);
             if (boundaries.xMax * 20 / 100 < _camera.transform.position.x)
-                _camera.transform.position = new Vector3(boundaries.xMax * 20 / 100, _camera.transform.position.y,
-                    _camera.transform.position.z);
-            if (boundaries.yMin > _camera.transform.position.y)
-                _camera.transform.position = new Vector3(_camera.transform.position.x, boundaries.yMin, 
-                    _camera.transform.position.z);
+                _camera.transform.position = new Vector3(boundaries.xMax * 20 / 100, cameraPosition.y,
+                    cameraPosition.z);
+            if (boundaries.yMin - 4.5 > _camera.transform.position.y)
+                _camera.transform.position = new Vector3(cameraPosition.x, boundaries.yMin - 4.5f, 
+                    cameraPosition.z);
             if (boundaries.yMax * 25 / 100 < _camera.transform.position.y)
-                _camera.transform.position = new Vector3(_camera.transform.position.x, boundaries.yMax * 25 / 100,
-                    _camera.transform.position.z);
+                _camera.transform.position = new Vector3(cameraPosition.x, boundaries.yMax * 25 / 100,
+                    cameraPosition.z);
         }
     }
 }
