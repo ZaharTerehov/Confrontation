@@ -6,5 +6,7 @@ namespace Gameplay.Interfaces
         public void ResourceProduction();
 
         public void ResetResource();
+
+        public int GetCountGold();
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using Gameplay.Controllers.ConstructionElements;
 using Gameplay.Controllers.Units;
 
 namespace Gameplay.Interfaces
@@ -17,6 +18,10 @@ namespace Gameplay.Interfaces
         public void OnUnitNotSelected();
 
         public int GetCountUnits();
+        public int GetPower();
+        
         public void CombineUnits(int unitService);
+
+        public void TakeDamage(SettlementController targetAttack);
     }
 }
