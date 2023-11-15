@@ -1,6 +1,5 @@
 ﻿
 using System;
-using System.Collections.Generic;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -9,15 +8,20 @@ namespace Gameplay.Services
 {
     public class BoardService : IBoardService
     {
-        public event Action ClickOnCapital;
-        public event Action ClickNotOnCapital;
+        public event Action ClickOnBuilding;
+        public event Action ClickNotOnBuilding;
 
-        public void ClickOnTilemap(Tilemap tilemap, Vector3Int position, List<Tile> clickableTiles)
+        public void ClickOnTilemap(Tilemap tilemap, Vector3Int position, Tile capital, Tile settlement)
         {
-            if (clickableTiles.Contains(tilemap.GetTile<Tile>(position)))
-                ClickOnCapital?.Invoke();
-            else if (!clickableTiles.Contains(tilemap.GetTile<Tile>(position)))
-                ClickNotOnCapital?.Invoke();
+            if (tilemap.GetTile<Tile>(position) == capital || tilemap.GetTile<Tile>(position) == settlement)
+            {
+                ClickOnBuilding?.Invoke();
+                
+                
+            }
+                
+            else
+                ClickNotOnBuilding?.Invoke();
         }
     }
 }

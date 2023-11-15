@@ -16,6 +16,7 @@ namespace Installers
     {
         [SerializeField] private GameObject _unit;
         [SerializeField] private GameObject _settlement;
+        [SerializeField] private GameObject _capital;
         
         public override void InstallBindings()
         {
@@ -30,6 +31,7 @@ namespace Installers
             Container.Bind<IResourceService>().To<ResourceService>().AsSingle();
             Container.Bind<IBoardService>().To<BoardService>().AsSingle();
             Container.Bind<ICapitalService>().To<CapitalService>().AsSingle();
+            Container.BindFactory<CapitalController, CapitalController.Factory>().FromComponentInNewPrefab(_capital);
             Container.Bind<ISettlementService>().To<SettlementService>().AsSingle();
             Container.BindFactory<SettlementController, SettlementController.Factory>().FromComponentInNewPrefab(_settlement);
         }

@@ -3,11 +3,12 @@ using Gameplay.Controllers.Units;
 using Gameplay.Enums;
 using Gameplay.Interfaces.ConstructionElements;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 namespace Gameplay.Controllers.ConstructionElements
 {
-    public class SettlementController : MonoBehaviour
+    public class SettlementController : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private SpriteRenderer _sprite;
         
@@ -18,6 +19,7 @@ namespace Gameplay.Controllers.ConstructionElements
         private void Start()
         {
             Init();
+            OnPointerClick(null);
         }
 
         private void Init()
@@ -50,11 +52,6 @@ namespace Gameplay.Controllers.ConstructionElements
             _settlementService.TakeDamage(unit);
         }
 
-        // public void Defense()
-        // {
-        //     
-        // }
-
         public void AddUnit(UnitController unit)
         {
             _settlementService.AddUnit(unit);
@@ -62,6 +59,11 @@ namespace Gameplay.Controllers.ConstructionElements
 
         public ObjectOwnership GetType() => _settlementService.GetType();
         
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _settlementService.OnClickingSettlement();
+        }
+
         public class Factory : PlaceholderFactory<SettlementController> {}
     }
 }

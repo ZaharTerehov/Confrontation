@@ -1,5 +1,8 @@
 ﻿
+using System;
+using Gameplay.Enums;
 using Gameplay.Interfaces.ConstructionElements;
+using UI.Element;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -18,6 +21,12 @@ namespace Gameplay.Controllers.ConstructionElements
         {
             _instance = this;
         }
+        
+        public void Init(Vector3Int position, ObjectOwnership objectOwnership)
+        {
+            Position = position;
+            _capitalService.Init(objectOwnership); 
+        }
 
         public static void OnSendUnit()
         {
@@ -31,7 +40,9 @@ namespace Gameplay.Controllers.ConstructionElements
         
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
+            _capitalService.OnClickingCapital();
         }
+        
+        public  class Factory : PlaceholderFactory<CapitalController> {}
     }
 }

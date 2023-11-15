@@ -1,14 +1,14 @@
 ﻿
 using System;
+using Gameplay.Enums;
 
 namespace Gameplay.Interfaces.ConstructionElements
 {
     public interface ICapitalService
     {
-        // public event Action<int> AddGold;
-        // public event Action<float> AddUnits;
+        public void Init(ObjectOwnership objectOwnership);
         
-        public event Action<int, int, int> GetInfo;
+        public event Action<int, int, int, int, int> ClickingCapital;
         
         public void ResourceProduction();
         public void ResetResource();
@@ -16,5 +16,7 @@ namespace Gameplay.Interfaces.ConstructionElements
         public int GetUnits();
 
         public int GetGold();
+        
+        public void OnClickingCapital();
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -15,41 +16,23 @@ namespace UI.Element
         [Space]
         [SerializeField] private Animator _animator;
 
+        private static TextBoxBuilding _instance;
+
         private bool _isOpen;
 
-        public void SetInfo(int lvl, int unitCount, int goldCount, int unitPS, int goldPS)
+        private void Start()
         {
-            _lvl.text += lvl.ToString();
-            _unitCount.text = "Unit \n" + unitCount.ToString("0.0");
-            _goldCount.text = "Gold \n" + goldCount;
-            _unitPS.text += unitPS.ToString();
-            _goldPS.text += goldPS.ToString();
+            _instance = this;
         }
 
-        // private void SetLevel(int level = 0)
-        // {
-        //     _lvl.text = _lvl.text + level.ToString();
-        // }
-        //
-        // public void OnSetUnitCount(float unitCount)
-        // {
-        //     _unitCount.text = "Unit \n" + unitCount.ToString("0.0");
-        // }
-        //
-        // public void OnSetGoldCount(int goldCount)
-        // {
-        //     _goldCount.text = "Gold \n" + goldCount;
-        // }
-        //
-        // private void SetUnitPS(float unitPS)
-        // {
-        //     _unitPS.text = _unitPS.text + unitPS.ToString();
-        // }
-        //
-        // private void SetGoldPS(float goldPS)
-        // {
-        //     _goldPS.text = _goldPS.text + goldPS.ToString();
-        // }
+        public static void SetInfo(int lvl, int unitCount, int goldCount, int unitPS, int goldPS)
+        {
+            _instance._lvl.text = "lvl - " + lvl;
+            _instance._unitCount.text = "Unit \n" + unitCount.ToString("0.0");
+            _instance._goldCount.text = "Gold \n" + goldCount;
+            _instance._unitPS.text = "UnitPS \n" + unitPS;
+            _instance._goldPS.text = "GoldPS \n" + goldPS;
+        }
 
         public void OnOpen()
         {

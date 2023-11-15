@@ -1,25 +1,37 @@
 ﻿
+using System;
 using Gameplay.Controllers.Units;
 using Gameplay.Enums;
 using Gameplay.Interfaces.ConstructionElements;
-using UnityEngine;
+using UI.Element;
+using Random = UnityEngine.Random;
 
 namespace Gameplay.Services.ConstructionElements
 {
     public class SettlementService : ISettlementService
     {
-        private int _level;
+        private int _lvl;
+        
         private int _garrisonDefenders;
         private int _playerSquad;
+        
+        private int _gold;
+        
+        private int _unitPS;
+        private int _goldPS;
 
         private ObjectOwnership _objectOwnership;
 
+        public event Action<int, int, int, int, int> ClickingSettlement;
+
         public void Init()
         {
-            _level = 1;
+            _lvl = 1;
             _objectOwnership = ObjectOwnership.Neutral;
             
             _garrisonDefenders = Random.Range(1, 2);
+            
+            ClickingSettlement += TextBoxBuilding.SetInfo;
         }
 
         public (int, int) GetGarrisonDefendersAndPlayerSquad()
@@ -30,6 +42,11 @@ namespace Gameplay.Services.ConstructionElements
         public void AddUnit(UnitController unit)
         {
             _playerSquad += unit.GetUnit();
+        }
+
+        public void OnClickingSettlement()
+        {
+            ClickingSettlement?.Invoke(_lvl, _playerSquad, _gold, _unitPS, _goldPS);
         }
 
         public void TakeDamage(UnitController unit)

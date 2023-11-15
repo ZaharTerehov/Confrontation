@@ -1,5 +1,6 @@
 ﻿
 using Gameplay.Controllers.ConstructionElements;
+using Gameplay.Enums;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -23,6 +24,7 @@ namespace Gameplay.Controllers
         [Inject] private IMapGeneratorService _mapGeneratorService;
         [Inject] private IBuilderService _builderService;
         [Inject] private SettlementController.Factory _settlementControllerFactory;
+        [Inject] private CapitalController.Factory _capitalControllerFactory;
 
         private static BuilderController _instance;
         
@@ -32,26 +34,33 @@ namespace Gameplay.Controllers
             
             _tilemap.ClearAllTiles();
             
-            _mapGeneratorService.TilemapGenerationIsFinished += OnInitCapital;
             _mapGeneratorService.SetSettlement += SpawnSettlement;
+            _mapGeneratorService.SetCapital += SpawnCapital;
         }
 
-        private void OnInitCapital(Vector3Int position, bool isAlly = false)
-        {
-            if(isAlly)
-                CapitalController.Position = position;
-            
-            _builderService.InitCapital(position, _tilemap, _capital);
-        }
-
-        private static void SpawnSettlement(Vector3Int position)
+        private void SpawnSettlement(Vector3Int position)
         {
             _instance._tilemap.SetTile(position, _instance._settlement);
             
             var worldPos = _instance._tilemap.CellToWorld(position);
             var settlement = _instance._settlementControllerFactory.Create().gameObject;
+            
             settlement.transform.position = worldPos;
             settlement.transform.SetParent(_instance._settlements, true);
+        }
+        
+        private static void SpawnCapital(Vector3Int position, ObjectOwnership objectOwnership)
+        {
+            _instance._tilemap.SetTile(position, _instance._capital);
+            
+            var worldPos = _instance._tilemap.CellToWorld(position);
+            var capital = _instance._capitalControllerFactory.Create().gameObject;
+            var capitalController = capital.GetComponent<CapitalController>();
+            
+            capitalController.Init(position, objectOwnership);
+            
+            capital.transform.position = worldPos;
+            capital.transform.SetParent(_instance._settlements, true);
         }
 
         public static void OnClearAllCapital()

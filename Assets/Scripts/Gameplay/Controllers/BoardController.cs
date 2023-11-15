@@ -1,5 +1,4 @@
 ﻿
-using System.Collections.Generic;
 using Gameplay.Interfaces;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -10,8 +9,9 @@ namespace Gameplay.Controllers
     public class BoardController : MonoBehaviour
     {
         private Camera _camera;
-
-        [SerializeField] private List<Tile> _clickableTiles = new List<Tile>();
+        
+        [SerializeField] private Tile _capital;
+        [SerializeField] private Tile _settlement;
         [SerializeField] private Tilemap _tilemap;
         
         [Inject] private IBoardService _builderService;
@@ -31,7 +31,7 @@ namespace Gameplay.Controllers
 
         private void ClickOnTilemap(Vector3Int position)
         {
-            _builderService.ClickOnTilemap(_tilemap, position, _clickableTiles);
+            _builderService.ClickOnTilemap(_tilemap, position, _capital, _settlement);
         }
     }
 }

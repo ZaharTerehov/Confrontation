@@ -61,10 +61,11 @@ namespace UI.Controllers
         private static UIController _instance;
 
         [Inject] private IUIService _uiWindowsManagerService;
-        [Inject] private ICapitalService _capitalService;
         [Inject] private ILevelService _levelService;
-        [Inject] private IBoardService _builderService;
+        [Inject] private IBoardService _boardService;
         [Inject] private IUnitService _unitService;
+        [Inject] private ISettlementService _settlementService;
+        [Inject] private ICapitalService _capitalService;
 
         private void Awake()
         {
@@ -80,29 +81,27 @@ namespace UI.Controllers
         {
             PlayAnimationClip();
 
-            // _capitalService.AddGold += _hudWindow.OnSetGold;
-            // _capitalService.AddGold += textBoxBuilding.OnSetGoldCount;
-            //
-            // _capitalService.AddUnits += textBoxBuilding.OnSetUnitCount;
-            
             _levelService.LevelLoaded += ResourceController.OnLoadLevel;
             _hudWindow.ExitFromPlaying += ResourceController.OnExitLevel;
             
             _hudWindow.ExitFromPlaying += BuilderController.OnClearAllCapital;
-            _buildingPanel.ClickSettlementButton += BuilderController.BuildSettlement;
-
-            _builderService.ClickOnCapital += textBoxBuilding.OnOpen;
-            _builderService.ClickNotOnCapital += textBoxBuilding.OnClose;
+            // _buildingPanel.ClickSettlementButton += BuilderController.BuildSettlement;
+            
+            _boardService.ClickOnBuilding += textBoxBuilding.OnOpen;
+            _boardService.ClickNotOnBuilding += textBoxBuilding.OnClose;
             
             _unitService.UnitSelected += _textBoxUnit.OnOpen;
             _unitService.UnitNotSelected += _textBoxUnit.OnClose;
             _unitService.CharacteristicsChanged += _textBoxUnit.SetPower;
             
-            _builderService.ClickOnCapital += _buttonsPanel.OnOpen;
-            _builderService.ClickNotOnCapital += _buttonsPanel.OnClose;
+            _boardService.ClickOnBuilding += _buttonsPanel.OnOpen;
+            _boardService.ClickNotOnBuilding += _buttonsPanel.OnClose;
 
             _buttonsPanel.SendUnits += CapitalController.OnSendUnit;
             _buttonsPanel.Building += _buildingPanel.OnOpen;
+            
+            // _settlementService.ClickingSettlement += textBoxBuilding.SetInfo;
+            // _capitalService.ClickingCapital += textBoxBuilding.SetInfo;
         }
         
         private async void PlayAnimationClip()

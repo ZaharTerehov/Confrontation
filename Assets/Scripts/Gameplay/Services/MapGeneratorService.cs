@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Gameplay.Enums;
 using Gameplay.Interfaces;
 using Gameplay.SO;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace Gameplay.Services
 
         public event Action<Vector3Int, bool> TilemapGenerationIsFinished;
         public event Action<Vector3Int> SetSettlement;
+        public event Action<Vector3Int, ObjectOwnership> SetCapital;
 
         public void GenerateLevel(LevelSettingData levelSettingsData, Tilemap tilemap, Tilemap edgeTilemap, ref Rect rect)
         {
@@ -57,9 +59,9 @@ namespace Gameplay.Services
             {
                 edgeTilemap.SetTile(position, levelSettingsData.EdgeTile);
             }
-
-            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)), true);
-            TilemapGenerationIsFinished?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)), false);
+            
+            SetCapital?.Invoke(new Vector3Int(Random.Range(1, 4), Random.Range(2, 8)), ObjectOwnership.Allied);
+            SetCapital?.Invoke(new Vector3Int(Random.Range(12, 14), Random.Range(2, 8)), ObjectOwnership.Enemy);
         }
 
         public void SetRandomTile(Vector3Int spawnPosition, LevelSettingData levelSettingsData, Tilemap tilemap)
